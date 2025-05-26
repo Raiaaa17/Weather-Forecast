@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-card">
+        <i class="fas fa-map-signs"></i>
+        <h1>404 - Page Not Found</h1>
+        <p>The page you're looking for doesn't exist.</p>
+        <a href="{{ url_for('index') }}" class="error-button">
+            <i class="fas fa-home"></i> Return Home
+        </a>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="motivation-card">
+    <p class="motivation-quote">"{{ daily_quote.content }}"</p>
+    <p class="motivation-author">— {{ daily_quote.author }}</p>
+</div>
+
+<div class="weather-grid">
+    {% for date, forecasts in weather_data.items() %}
+    <div class="weather-card" style="--card-index: {{ loop.index }}">
+        <div class="date">{{ date }}</div>
+        <div class="forecast">
+            {% for forecast in forecasts %}
+            <div class="time-slot">
+                <span class="time">{{ forecast.time }}</span>
+                <span class="weather">
+                    <i class="fas fa-{{ forecast.icon }}"></i>
+                    {{ forecast.description }}
+                </span>
+                <span class="temp">{{ forecast.temp }}°C</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

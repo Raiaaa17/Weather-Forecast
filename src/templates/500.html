@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-card">
+        <i class="fas fa-cogs"></i>
+        <h1>500 - Internal Server Error</h1>
+        <p>Something went wrong on our end. Please try again later.</p>
+        <a href="{{ url_for('index') }}" class="error-button">
+            <i class="fas fa-home"></i> Return Home
+        </a>
+    </div>
+</div>
+{% endblock %} 

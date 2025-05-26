@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NUS Kent Ridge Weather Forecast</title>
+    <title>{% block title %}NUS Kent Ridge Weather Forecast{% endblock %}</title>
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
     <meta name="author" content="Rayana Diana">
     <meta name="description" content="NUS Kent Ridge Weather Forecast by Rayana Diana">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <div class="container">
@@ -17,30 +18,7 @@
             <h1>NUS Kent Ridge Weather Forecast</h1>
         </header>
 
-        <div class="motivation-card">
-            <p class="motivation-quote">"{{ daily_quote.content }}"</p>
-            <p class="motivation-author">— {{ daily_quote.author }}</p>
-        </div>
-
-        <div class="weather-grid">
-            {% for date, forecasts in weather_data.items() %}
-            <div class="weather-card" style="--card-index: {{ loop.index }}">
-                <div class="date">{{ date }}</div>
-                <div class="forecast">
-                    {% for forecast in forecasts %}
-                    <div class="time-slot">
-                        <span class="time">{{ forecast.time }}</span>
-                        <span class="weather">
-                            <i class="fas fa-{{ forecast.icon }}"></i>
-                            {{ forecast.description }}
-                        </span>
-                        <span class="temp">{{ forecast.temp }}°C</span>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+        {% block content %}{% endblock %}
 
         <footer class="footer">
             <div class="footer-content">
@@ -50,12 +28,15 @@
                         <i class="fas fa-envelope"></i> rayanarahadiva@gmail.com
                     </a>
                 </div>
+                {% if last_update %}
                 <div class="last-update">
                     <i class="fas fa-clock"></i>
                     Last updated: {{ last_update }}
                 </div>
+                {% endif %}
             </div>
         </footer>
     </div>
+    {% block extra_js %}{% endblock %}
 </body>
-</html>
+</html> 

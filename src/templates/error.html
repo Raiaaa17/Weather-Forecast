@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-card">
+        <i class="fas fa-exclamation-circle"></i>
+        <h1>Oops! Something went wrong</h1>
+        <p>{{ error }}</p>
+        <a href="{{ url_for('index') }}" class="error-button">
+            <i class="fas fa-home"></i> Return Home
+        </a>
+    </div>
+</div>
+{% endblock %} 

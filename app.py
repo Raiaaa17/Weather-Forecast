@@ -1,6 +1,7 @@
 from flask import Flask, render_template, url_for
 from flask_apscheduler import APScheduler
 from weather import get_weather, update_weather
+from motivation import get_daily_quote
 from datetime import datetime
 
 app = Flask(__name__, static_folder='static')
@@ -27,9 +28,11 @@ def scheduled_weather_update():
 def index():
     weather_data = get_weather()
     last_update = datetime.now().strftime("%H:%M:%S")
+    daily_quote = get_daily_quote()
     return render_template('index.html', 
                          weather_data=weather_data, 
-                         last_update=last_update)
+                         last_update=last_update,
+                         daily_quote=daily_quote)
 
 # Vercel requires this
 app.debug = True

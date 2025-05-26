@@ -1,3 +1,4 @@
+/* Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -23,6 +24,7 @@ body {
     flex-direction: column;
 }
 
+/* Header Styles */
 .header {
     text-align: center;
     margin-bottom: 2rem;
@@ -50,6 +52,7 @@ h1::after {
     border-radius: 3px;
 }
 
+/* Motivation Card Styles */
 .motivation-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -76,6 +79,7 @@ h1::after {
     font-weight: 500;
 }
 
+/* Weather Grid Styles */
 .weather-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -94,23 +98,14 @@ h1::after {
     transition: transform 0.3s ease;
     animation: fadeIn 0.5s ease-out forwards;
     opacity: 0;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    animation-delay: calc(var(--card-index) * 0.1s);
 }
 
 .weather-card:hover {
     transform: translateY(-5px) rotateX(5deg);
 }
 
+/* Weather Card Content Styles */
 .date {
     font-size: 1.4rem;
     color: #fff;
@@ -166,40 +161,7 @@ h1::after {
     margin-left: 8px;
 }
 
-.weather-card {
-    animation: fadeIn 0.5s ease-out forwards;
-    animation-delay: calc(var(--card-index) * 0.1s);
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 1rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    .weather-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .weather-card {
-        padding: 1rem;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-info {
-        justify-content: center;
-        text-align: center;
-        padding: 0 0.5rem;
-    }
-}
-
+/* Footer Styles */
 .footer {
     margin-top: 3rem;
     padding: 1rem 0;
@@ -238,10 +200,6 @@ h1::after {
     color: #fff;
 }
 
-.footer-info .fa-heart {
-    color: #ff6b6b;
-}
-
 .last-update {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
@@ -252,4 +210,117 @@ h1::after {
 
 .last-update i {
     color: #7fdbff;
+}
+
+/* Error Page Styles */
+.error-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.error-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 18px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.error-card i {
+    font-size: 4rem;
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+}
+
+.error-card h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0;
+}
+
+.error-card h1::after {
+    display: none;
+}
+
+.error-card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.error-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.error-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .weather-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-card {
+        padding: 1rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .error-card {
+        padding: 1.5rem;
+    }
+
+    .error-card i {
+        font-size: 3rem;
+    }
+
+    .error-card h1 {
+        font-size: 1.5rem;
+    }
 } 
