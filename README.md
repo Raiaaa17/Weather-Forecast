@@ -24,6 +24,26 @@ A beautiful weather forecast application for NUS Kent Ridge campus with daily mo
 - **Deployment**: Vercel
 - **Other**: Flask-APScheduler for automated updates
 
+## API Integration
+
+### OpenWeatherMap API
+- Used for fetching weather forecast data
+- Updates every 3 hours
+- Includes temperature, weather conditions, and timestamps
+
+### Zen Quotes API
+- Provides daily motivational quotes
+- No authentication required
+- Includes quote text and author
+
+## Error Handling
+
+The application includes comprehensive error handling:
+- Custom error pages (404, 500)
+- Fallback quotes when API fails
+- Weather data caching for offline functionality
+- Detailed logging for debugging
+
 ## Project Structure
 
 ```
@@ -50,26 +70,6 @@ nus-weather-forecast/
 ├── wsgi.py
 └── README.md
 ```
-## API Integration
-
-### OpenWeatherMap API
-- Used for fetching weather forecast data
-- Updates every 3 hours
-- Includes temperature, weather conditions, and timestamps
-
-### Zen Quotes API
-- Provides daily motivational quotes
-- No authentication required
-- Includes quote text and author
-
-## Error Handling
-
-The application includes comprehensive error handling:
-- Custom error pages (404, 500)
-- Fallback quotes when API fails
-- Weather data caching for offline functionality
-- Detailed logging for debugging
-
 
 ## License
 
