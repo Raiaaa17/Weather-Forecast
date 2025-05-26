@@ -37,7 +37,8 @@ def fetch_weather_data():
         "lat": 1.2966,  # NUS Kent Ridge campus coordinates
         "lon": 103.7764,
         "appid": API_KEY,
-        "units": "metric"  # Use metric units for temperature
+        "units": "metric",  # Use metric units for temperature
+        "cnt": 40  # Get 5 days of data (8 forecasts per day)
     }
 
     response = requests.get(OWM_Endpoint, params=parameters)
@@ -45,27 +46,37 @@ def fetch_weather_data():
     data = response.json()
 
     formatted_data = {}
+    seen_dates = set()
+    
     for item in data["list"]:
         # Get date and time
         dt = datetime.strptime(item["dt_txt"], "%Y-%m-%d %H:%M:%S")
         date = dt.strftime("%b %d")  # Format: "May 27"
         
-        # Get weather details
-        weather_condition = item["weather"][0]["main"]
-        temp = round(item["main"]["temp"])  # Temperature is already in Celsius
-        
-        # Create forecast object
-        forecast = {
-            "time": dt.strftime("%H:%M"),
-            "description": weather_condition,
-            "temp": temp,
-            "icon": get_weather_icon(weather_condition)
-        }
-        
-        # Add to formatted data
-        if date not in formatted_data:
-            formatted_data[date] = []
-        formatted_data[date].append(forecast)
+        # Only process if we haven't seen 5 days yet
+        if len(seen_dates) < 5 or date in seen_dates:
+            seen_dates.add(date)
+            
+            # Get weather details
+            weather_condition = item["weather"][0]["main"]
+            temp = round(item["main"]["temp"])  # Temperature is already in Celsius
+            
+            # Create forecast object
+            forecast = {
+                "time": dt.strftime("%H:%M"),
+                "description": weather_condition,
+                "temp": temp,
+                "icon": get_weather_icon(weather_condition)
+            }
+            
+            # Add to formatted data
+            if date not in formatted_data:
+                formatted_data[date] = []
+            formatted_data[date].append(forecast)
+    
+    # Only keep the first 5 days
+    if len(formatted_data) > 5:
+        formatted_data = dict(list(formatted_data.items())[:5])
     
     return formatted_data
 

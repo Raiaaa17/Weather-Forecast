@@ -2,7 +2,8 @@
 
 A beautiful weather forecast application for NUS Kent Ridge campus with daily motivational quotes. The application features a modern, responsive design with a dark theme and glassmorphism effects.
 
-![Weather Forecast Screenshot](static/images/screenshot.png)
+🌐 **Live Demo**: [View the application on Vercel](https://weather-forecast-raiaaa17.vercel.app)
+![Weather Forecast Screenshot](images/screenshot.png)
 
 ## Features
 

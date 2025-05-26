@@ -78,16 +78,18 @@ h1::after {
 
 .weather-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
     width: 100%;
+    overflow-x: auto;
 }
 
 .weather-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 18px;
-    padding: 1.2rem;
+    border-radius: 15px;
+    padding: 0.8rem;
+    min-width: 200px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transform-style: preserve-3d;
@@ -171,9 +173,15 @@ h1::after {
     animation-delay: calc(var(--card-index) * 0.1s);
 }
 
+@media (max-width: 1200px) {
+    .weather-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     body {
-        padding: 1rem;
+        padding: 0.8rem;
     }
 
     h1 {
@@ -181,11 +189,13 @@ h1::after {
     }
 
     .weather-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
     }
 
     .weather-card {
-        padding: 1rem;
+        padding: 0.8rem;
+        min-width: 0;
     }
 
     .footer-content {
@@ -197,6 +207,12 @@ h1::after {
         justify-content: center;
         text-align: center;
         padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .weather-grid {
+        grid-template-columns: 1fr;
     }
 }
 
