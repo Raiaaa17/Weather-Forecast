@@ -101,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ensure SGT is displayed on initial load
     ensureSGTDisplay();
     
+    // Immediately fetch fresh data
+    refreshWeather();
+    
     // Set up initial auto-refresh
     setupAutoRefresh();
     
