@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NUS Kent Ridge Weather Forecast{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <meta name="author" content="Rayana Diana">
+    <meta name="description" content="NUS Kent Ridge Weather Forecast by Rayana Diana">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>NUS Kent Ridge Weather Forecast</h1>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <span>Made with <i class="fas fa-heart"></i> by Rayana Diana</span>
+                    <a href="mailto:rayanarahadiva@gmail.com">
+                        <i class="fas fa-envelope"></i> rayanarahadiva@gmail.com
+                    </a>
+                </div>
+                {% if last_update %}
+                <div class="last-update">
+                    <i class="fas fa-clock"></i>
+                    Last updated: <span id="last-update-time">{{ last_update }}</span>
+                    <button onclick="refreshWeather()" class="refresh-btn" id="refresh-btn">
+                        <i class="fas fa-sync-alt"></i>
+                        Refresh
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </footer>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

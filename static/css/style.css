@@ -252,4 +252,35 @@ h1::after {
 
 .last-update i {
     color: #7fdbff;
+}
+
+/* Refresh Button Styles */
+.refresh-btn {
+    background: none;
+    border: none;
+    color: #7fdbff;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.refresh-btn:hover {
+    transform: scale(1.1);
+}
+
+.refresh-btn i {
+    transition: transform 0.5s ease;
+}
+
+.refresh-btn.loading i {
+    transform: rotate(360deg);
+}
+
+.last-update {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 } 

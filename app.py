@@ -1,8 +1,13 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, jsonify
 from flask_apscheduler import APScheduler
 from weather import get_weather, update_weather
 from motivation import get_daily_quote
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 scheduler = APScheduler()
@@ -33,6 +38,16 @@ def index():
                          weather_data=weather_data, 
                          last_update=last_update,
                          daily_quote=daily_quote)
+
+@app.route('/refresh-weather')
+def refresh_weather():
+    update_weather()
+    weather_data = get_weather()
+    last_update = datetime.now().strftime("%H:%M:%S")
+    return jsonify({
+        'weather_data': weather_data,
+        'last_update': last_update
+    })
 
 # Vercel requires this
 app.debug = True
