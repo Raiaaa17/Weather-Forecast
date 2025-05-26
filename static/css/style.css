@@ -225,8 +225,10 @@ h1::after {
 
 .footer-content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 .footer-info {
@@ -237,12 +239,25 @@ h1::after {
     padding: 0 1rem;
 }
 
+.footer-info span, .footer-info a {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-info .fa-heart {
+    color: #ff6b6b;
+}
+
 .last-update {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .last-update i {
@@ -284,5 +299,9 @@ h1::after {
     .footer-info {
         flex-direction: column;
         gap: 1rem;
+    }
+    
+    .last-update {
+        flex-direction: column;
     }
 } 

@@ -32,7 +32,8 @@
                 <div class="last-update">
                     <i class="fas fa-clock"></i>
                     Last updated: <span id="last-update-time">{{ last_update }}</span>
-                    <button onclick="refreshWeather()" class="refresh-btn" id="refresh-btn">
+            
+                    <button onclick="refreshWeather()" id="refresh-btn" class="refresh-btn" title="Refresh weather data">
                         <i class="fas fa-sync-alt"></i>
                         Refresh
                     </button>
@@ -42,6 +43,9 @@
         </footer>
     </div>
 
+   
+
+            
     <!-- Load JavaScript -->
     <script src="{{ url_for('static', filename='js/weather.js') }}"></script>
     {% block extra_js %}{% endblock %}
