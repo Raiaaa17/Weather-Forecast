@@ -13,22 +13,21 @@ function refreshWeather() {
             const weatherGrid = document.querySelector('.weather-grid');
             if (weatherGrid) {
                 let newHtml = '';
-                Object.entries(data.weather_data).forEach(([date, timeData], index) => {
+                Object.entries(data.weather_data).forEach(([date, forecasts], index) => {
                     newHtml += `
                         <div class="weather-card" style="--card-index: ${index + 1}">
                             <div class="date">${date}</div>
                             <div class="forecast">`;
                     
-                    Object.entries(timeData).forEach(([time, [weather, temp]]) => {
-                        const weatherIcon = getWeatherIcon(weather);
+                    forecasts.forEach(forecast => {
                         newHtml += `
                             <div class="time-slot">
-                                <span class="time">${time}</span>
+                                <span class="time">${forecast.time}</span>
                                 <span class="weather">
-                                    <i class="fas fa-${weatherIcon}"></i>
-                                    ${weather}
+                                    <i class="fas fa-${forecast.icon}"></i>
+                                    ${forecast.description}
                                 </span>
-                                <span class="temp">${temp}°C</span>
+                                <span class="temp">${forecast.temp}°C</span>
                             </div>`;
                     });
                     
