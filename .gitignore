@@ -42,4 +42,11 @@ data/
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Node
+node_modules/
+
+# TypeScript
+*.js.map
+static/js/*.js 

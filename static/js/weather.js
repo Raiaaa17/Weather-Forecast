@@ -4,83 +4,49 @@ const REFRESH_INTERVAL = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 function refreshWeather() {
     const refreshBtn = document.getElementById('refresh-btn');
     const lastUpdateSpan = document.getElementById('last-update-time');
+    const nextUpdateSpan = document.getElementById('next-update-time');
     
-    // Add loading state
     if (refreshBtn) {
-        refreshBtn.classList.add('loading');
         refreshBtn.disabled = true;
+        refreshBtn.querySelector('i').classList.add('fa-spin');
     }
 
     fetch('/refresh-weather')
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Network response was not ok');
             return response.json();
         })
         .then(data => {
-            // Update the weather cards
-            const weatherGrid = document.querySelector('.weather-grid');
-            if (weatherGrid) {
-                let newHtml = '';
-                Object.entries(data.weather_data).forEach(([date, forecasts], index) => {
-                    newHtml += `
-                        <div class="weather-card" style="--card-index: ${index + 1}">
-                            <div class="date">${date}</div>
-                            <div class="forecast">`;
-                    
-                    forecasts.forEach(forecast => {
-                        newHtml += `
-                            <div class="time-slot">
-                                <span class="time">${forecast.time}</span>
-                                <span class="weather">
-                                    <i class="fas fa-${forecast.icon}"></i>
-                                    ${forecast.description}
-                                </span>
-                                <span class="temp">${forecast.temp}°C</span>
-                            </div>`;
-                    });
-                    
-                    newHtml += `
-                            </div>
-                        </div>`;
-                });
-                weatherGrid.innerHTML = newHtml;
-            }
-
-            // Update last update time
-            if (lastUpdateSpan) {
-                lastUpdateSpan.textContent = data.last_update;
-            }
+            // Reload the page to get fresh server-side rendered content
+            window.location.reload();
         })
         .catch(error => {
             console.error('Error refreshing weather:', error);
-            // Only show alert if it was a manual refresh
-            if (refreshBtn && refreshBtn.classList.contains('loading')) {
-                alert('Failed to refresh weather data. Please try again.');
-            }
+            alert('Failed to refresh weather data. Please try again.');
         })
         .finally(() => {
-            // Remove loading state
             if (refreshBtn) {
-                refreshBtn.classList.remove('loading');
                 refreshBtn.disabled = false;
+                refreshBtn.querySelector('i').classList.remove('fa-spin');
             }
         });
 }
 
-// Initialize auto-refresh when the page loads
+// Auto-refresh logic
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial refresh
-    refreshWeather();
-    
-    // Set up auto-refresh interval
-    setInterval(refreshWeather, REFRESH_INTERVAL);
-    
-    // Add visibility change handler to refresh when tab becomes visible
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-            refreshWeather();
+    const nextUpdateSpan = document.getElementById('next-update-time');
+    if (nextUpdateSpan) {
+        const updateTime = nextUpdateSpan.getAttribute('data-time');
+        if (updateTime) {
+            const nextUpdate = new Date(updateTime);
+            const now = new Date();
+            const timeUntilUpdate = nextUpdate - now;
+            
+            if (timeUntilUpdate > 0) {
+                setTimeout(() => {
+                    window.location.reload();
+                }, timeUntilUpdate);
+            }
         }
-    });
+    }
 }); 

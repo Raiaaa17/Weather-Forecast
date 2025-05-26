@@ -299,4 +299,73 @@ h1::after {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.update-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.last-update, .next-update {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.last-update i {
+    color: #7fdbff;
+}
+
+.next-update i {
+    color: #ff9f43;
+}
+
+.refresh-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.refresh-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.fa-spin {
+    animation: fa-spin 1s linear infinite;
+}
+
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .update-info {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 0.8rem;
+    }
 } 

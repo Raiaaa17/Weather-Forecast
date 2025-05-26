@@ -6,6 +6,21 @@
     <p class="motivation-author">— {{ daily_quote.author }}</p>
 </div>
 
+<div class="update-info">
+    <span class="last-update">
+        <i class="fas fa-clock"></i>
+        Last updated: <span id="last-update-time">{{ last_update }}</span>
+    </span>
+    <span class="next-update">
+        <i class="fas fa-sync"></i>
+        Next update: <span id="next-update-time" data-time="{{ next_update }}">{{ next_update }}</span>
+    </span>
+    <button onclick="refreshWeather()" id="refresh-btn" class="refresh-btn" title="Refresh weather data">
+        <i class="fas fa-sync-alt"></i>
+        Refresh Now
+    </button>
+</div>
+
 <div class="weather-grid">
     {% for date, forecasts in weather_data.items() %}
     <div class="weather-card" style="--card-index: {{ loop.index }}">
