@@ -37,8 +37,9 @@ def index():
 @app.route('/refresh-weather')
 def refresh_weather():
     try:
-        update_weather()
-        weather_data = get_weather()
+        # Get fresh data from the API
+        weather_data = update_weather()
+        
         # Get current time in SGT
         sgt = pytz.timezone('Asia/Singapore')
         current_time = datetime.now(sgt)

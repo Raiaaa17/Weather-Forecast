@@ -62,21 +62,41 @@ function refreshWeather() {
         });
 }
 
-// Auto-refresh logic
-document.addEventListener('DOMContentLoaded', () => {
-    const nextUpdateSpan = document.getElementById('next-update-time');
-    if (nextUpdateSpan) {
-        const updateTime = nextUpdateSpan.getAttribute('data-time');
-        if (updateTime) {
-            const nextUpdate = new Date(updateTime);
-            const now = new Date();
-            const timeUntilUpdate = nextUpdate - now;
-            
-            if (timeUntilUpdate > 0) {
-                setTimeout(() => {
-                    window.location.reload();
-                }, timeUntilUpdate);
-            }
-        }
+// Function to calculate time until next 3-hour mark
+function getTimeUntilNextUpdate() {
+    const now = new Date();
+    const hours = now.getHours();
+    const nextUpdateHour = Math.ceil(hours / 3) * 3; // Round up to next 3-hour mark
+    const nextUpdate = new Date(now);
+    nextUpdate.setHours(nextUpdateHour, 0, 0, 0);
+    
+    if (nextUpdate <= now) {
+        nextUpdate.setHours(nextUpdate.getHours() + 3); // Add 3 hours if we're past the time
     }
+    
+    return nextUpdate - now;
+}
+
+// Auto-refresh logic
+function setupAutoRefresh() {
+    const timeUntilUpdate = getTimeUntilNextUpdate();
+    console.log(`Next auto-refresh in ${Math.round(timeUntilUpdate / 1000 / 60)} minutes`);
+    
+    setTimeout(() => {
+        refreshWeather();
+        setupAutoRefresh(); // Set up next refresh
+    }, timeUntilUpdate);
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Set up initial auto-refresh
+    setupAutoRefresh();
+    
+    // Also refresh when tab becomes visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            refreshWeather();
+        }
+    });
 }); 

@@ -84,20 +84,26 @@ def update_weather():
     """Update the cached weather data"""
     global cached_weather_data, last_update_time
     try:
+        # Always fetch fresh data from the API
         cached_weather_data = fetch_weather_data()
         sgt = pytz.timezone('Asia/Singapore')
         last_update_time = datetime.now(sgt)
         print(f"Weather data updated at {last_update_time.strftime('%Y-%m-%d %H:%M:%S SGT')}")
+        return cached_weather_data  # Return the fresh data
     except Exception as e:
         print(f"Error updating weather data: {e}")
+        if cached_weather_data is None:
+            raise  # Only raise if we have no cached data
+        return cached_weather_data  # Return cached data if available
 
 def get_weather():
     """Get weather data from cache or fetch new data if needed"""
     global cached_weather_data
     if cached_weather_data is None:
-        update_weather()
+        return update_weather()
     return cached_weather_data
 
+# Initialize weather data
 get_weather()
 
 
