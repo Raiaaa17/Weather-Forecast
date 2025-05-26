@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <title>NUS Kent Ridge Weather Forecast</title>
+    <meta name="author" content="Rayana Diana">
+    <meta name="description" content="NUS Kent Ridge Weather Forecast by Rayana Diana">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>NUS Kent Ridge Weather Forecast</h1>
+        </div>
+        <div class="weather-grid">
+            {% for date, times in weather_data.items() %}
+            <div class="weather-card" style="--card-index: {{ loop.index }}">
+                <div class="date">{{ date }}</div>
+                <div class="forecast">
+                    {% for time, conditions in times.items() %}
+                    <div class="time-slot">
+                        <span class="time">{{ time }}</span>
+                        <span class="weather">
+                            {% if conditions[0] == 'Clear' %}
+                                <i class="fas fa-sun"></i>
+                            {% elif conditions[0] == 'Clouds' %}
+                                <i class="fas fa-cloud"></i>
+                            {% elif conditions[0] == 'Rain' %}
+                                <i class="fas fa-cloud-rain"></i>
+                            {% elif conditions[0] == 'Snow' %}
+                                <i class="fas fa-snowflake"></i>
+                            {% elif conditions[0] == 'Thunderstorm' %}
+                                <i class="fas fa-bolt"></i>
+                            {% elif conditions[0] == 'Drizzle' %}
+                                <i class="fas fa-cloud-rain"></i>
+                            {% elif conditions[0] == 'Mist' or conditions[0] == 'Fog' %}
+                                <i class="fas fa-smog"></i>
+                            {% else %}
+                                <i class="fas fa-cloud"></i>
+                            {% endif %}
+                            {{ conditions[0] }}
+                            <span class="temp">{{ conditions[1] }}°C</span>
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="footer">
+            <p>made by Rayana Diana</p>
+        </div>
+    </div>
+</body>
+</html> 
