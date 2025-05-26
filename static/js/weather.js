@@ -1,13 +1,23 @@
+// Constants
+const REFRESH_INTERVAL = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
+
 function refreshWeather() {
     const refreshBtn = document.getElementById('refresh-btn');
     const lastUpdateSpan = document.getElementById('last-update-time');
     
     // Add loading state
-    refreshBtn.classList.add('loading');
-    refreshBtn.disabled = true;
+    if (refreshBtn) {
+        refreshBtn.classList.add('loading');
+        refreshBtn.disabled = true;
+    }
 
     fetch('/refresh-weather')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             // Update the weather cards
             const weatherGrid = document.querySelector('.weather-grid');
@@ -39,16 +49,23 @@ function refreshWeather() {
             }
 
             // Update last update time
-            lastUpdateSpan.textContent = data.last_update;
+            if (lastUpdateSpan) {
+                lastUpdateSpan.textContent = data.last_update;
+            }
         })
         .catch(error => {
             console.error('Error refreshing weather:', error);
-            alert('Failed to refresh weather data. Please try again.');
+            // Only show alert if it was a manual refresh
+            if (refreshBtn && refreshBtn.classList.contains('loading')) {
+                alert('Failed to refresh weather data. Please try again.');
+            }
         })
         .finally(() => {
             // Remove loading state
-            refreshBtn.classList.remove('loading');
-            refreshBtn.disabled = false;
+            if (refreshBtn) {
+                refreshBtn.classList.remove('loading');
+                refreshBtn.disabled = false;
+            }
         });
 }
 
@@ -65,4 +82,20 @@ function getWeatherIcon(weather) {
         'Fog': 'smog'
     };
     return icons[weather] || 'cloud';
-} 
+}
+
+// Initialize auto-refresh when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial refresh
+    refreshWeather();
+    
+    // Set up auto-refresh interval
+    setInterval(refreshWeather, REFRESH_INTERVAL);
+    
+    // Add visibility change handler to refresh when tab becomes visible
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            refreshWeather();
+        }
+    });
+}); 
