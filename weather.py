@@ -1,9 +1,17 @@
+import os
 import requests
 from datetime import datetime
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 def get_weather():
     OWM_Endpoint = "https://api.openweathermap.org/data/2.5/forecast"
-    API_KEY = "ebd23d6d15dc62fec33baa419e78fb6c"
+    API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
+    
+    if not API_KEY:
+        raise ValueError("OpenWeatherMap API key not found. Please set OPENWEATHERMAP_API_KEY in your .env file.")
 
     parameters = {
         "lat": 1.2966,  # NUS Kent Ridge campus coordinates

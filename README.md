@@ -33,12 +33,20 @@ cd rain_alert
 pip install -r requirements.txt
 ```
 
-3. Run the application:
+3. Set up environment variables:
+   - Create a `.env` file in the root directory
+   - Add your OpenWeatherMap API key:
+   ```
+   OPENWEATHERMAP_API_KEY=your_api_key_here
+   ```
+   - You can get an API key by signing up at [OpenWeatherMap](https://openweathermap.org/api)
+
+4. Run the application:
 ```bash
 python app.py
 ```
 
-4. Open your browser and navigate to `http://localhost:5000`
+5. Open your browser and navigate to `http://localhost:5000`
 
 ## Project Structure
 
@@ -47,6 +55,7 @@ rain_alert/
 ├── app.py              # Flask application
 ├── weather.py          # Weather API integration
 ├── requirements.txt    # Project dependencies
+├── .env               # Environment variables (not tracked by Git)
 ├── static/
 │   └── css/
 │       └── style.css  # Styles
@@ -56,8 +65,10 @@ rain_alert/
 
 ## Environment Variables
 
-The application uses the following environment variables:
+The application requires the following environment variables in a `.env` file:
 - `OPENWEATHERMAP_API_KEY` - Your OpenWeatherMap API key
+
+⚠️ **Important**: Never commit your `.env` file or expose your API keys. The `.env` file is already added to `.gitignore`.
 
 ## Contributing
 
