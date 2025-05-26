@@ -1,6 +1,7 @@
 import os
 import requests
 from datetime import datetime
+import pytz
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -73,8 +74,9 @@ def update_weather():
     global cached_weather_data, last_update_time
     try:
         cached_weather_data = fetch_weather_data()
-        last_update_time = datetime.now()
-        print(f"Weather data updated at {last_update_time}")
+        sgt = pytz.timezone('Asia/Singapore')
+        last_update_time = datetime.now(sgt)
+        print(f"Weather data updated at {last_update_time.strftime('%Y-%m-%d %H:%M:%S SGT')}")
     except Exception as e:
         print(f"Error updating weather data: {e}")
 

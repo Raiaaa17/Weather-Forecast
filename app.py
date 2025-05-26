@@ -3,6 +3,7 @@ from flask_apscheduler import APScheduler
 from weather import get_weather, update_weather
 from motivation import get_daily_quote
 from datetime import datetime
+import pytz
 from dotenv import load_dotenv
 import os
 
@@ -32,7 +33,9 @@ def scheduled_weather_update():
 @app.route('/')
 def index():
     weather_data = get_weather()
-    last_update = datetime.now().strftime("%H:%M:%S")
+    # Get current time in SGT
+    sgt = pytz.timezone('Asia/Singapore')
+    last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
     daily_quote = get_daily_quote()
     return render_template('index.html', 
                          weather_data=weather_data, 
@@ -43,7 +46,9 @@ def index():
 def refresh_weather():
     update_weather()
     weather_data = get_weather()
-    last_update = datetime.now().strftime("%H:%M:%S")
+    # Get current time in SGT
+    sgt = pytz.timezone('Asia/Singapore')
+    last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
     return jsonify({
         'weather_data': weather_data,
         'last_update': last_update
