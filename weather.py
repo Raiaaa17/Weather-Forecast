@@ -101,7 +101,7 @@ def update_weather():
         cached_weather_data = fetch_weather_data()
         sgt = pytz.timezone('Asia/Singapore')
         last_update_time = datetime.now(sgt)
-        print(f"Weather data updated at {last_update_time.strftime('%Y-%m-%d %H:%M:%S SGT')}")
+        print(f"Weather data updated at {last_update_time.strftime('%Y-%m-%d %H:%M:%S')}")
         return cached_weather_data  # Return the fresh data
     except Exception as e:
         print(f"Error updating weather data: {e}")
