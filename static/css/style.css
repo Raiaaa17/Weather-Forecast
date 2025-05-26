@@ -227,8 +227,6 @@ h1::after {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .footer-info {
@@ -236,86 +234,10 @@ h1::after {
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    flex-wrap: wrap;
     padding: 0 1rem;
 }
 
-.footer-info span, .footer-info a {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.footer-info a:hover {
-    color: #fff;
-}
-
-.footer-info .fa-heart {
-    color: #ff6b6b;
-}
-
 .last-update {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.last-update i {
-    color: #7fdbff;
-}
-
-/* Refresh Button Styles */
-.refresh-btn {
-    background: none;
-    border: none;
-    color: #7fdbff;
-    cursor: pointer;
-    padding: 5px;
-    transition: transform 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.refresh-btn:hover {
-    transform: scale(1.1);
-}
-
-.refresh-btn i {
-    transition: transform 0.5s ease;
-}
-
-.refresh-btn.loading i {
-    transform: rotate(360deg);
-}
-
-.last-update {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.update-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1rem;
-    text-align: center;
-}
-
-.last-update, .next-update {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
     display: flex;
@@ -325,10 +247,6 @@ h1::after {
 
 .last-update i {
     color: #7fdbff;
-}
-
-.next-update i {
-    color: #ff9f43;
 }
 
 .refresh-btn {
@@ -363,9 +281,8 @@ h1::after {
 }
 
 @media (max-width: 768px) {
-    .update-info {
+    .footer-info {
         flex-direction: column;
         gap: 1rem;
-        padding: 0.8rem;
     }
 } 
