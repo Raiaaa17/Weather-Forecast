@@ -7,7 +7,7 @@ A beautiful weather forecast application for NUS Kent Ridge campus with daily mo
 
 ## Features
 
-- 🌤️ Real-time weather updates every 3 hours
+- 🌤️ Client-side weather updates every 3 hours
 - 💭 Daily motivational quotes
 - 🎨 Modern dark theme with glassmorphism effects
 - 📱 Fully responsive design
@@ -22,14 +22,14 @@ A beautiful weather forecast application for NUS Kent Ridge campus with daily mo
 - **Frontend**: HTML5, CSS3, JavaScript
 - **APIs**: OpenWeatherMap, Zen Quotes
 - **Deployment**: Vercel
-- **Other**: Flask-APScheduler for automated updates
 
 ## API Integration
 
 ### OpenWeatherMap API
 - Used for fetching weather forecast data
-- Updates every 3 hours
+- Client-side updates every 3 hours
 - Includes temperature, weather conditions, and timestamps
+- Automatic refresh when tab becomes visible
 
 ### Zen Quotes API
 - Provides daily motivational quotes
@@ -48,26 +48,18 @@ The application includes comprehensive error handling:
 
 ```
 nus-weather-forecast/
-├── src/
-│   ├── config/
-│   │   └── settings.py
-│   ├── services/
-│   │   ├── quote_service.py
-│   │   └── weather_service.py
-│   ├── static/
-│   │   ├── css/
-│   │   │   └── style.css
-│   │   └── images/
-│   ├── templates/
-│   │   ├── base.html
-│   │   ├── index.html
-│   │   ├── error.html
-│   │   ├── 404.html
-│   │   └── 500.html
-│   └── app.py
-├── data/
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── weather.js
+├── templates/
+│   ├── base.html
+│   └── index.html
+├── app.py
+├── weather.py
+├── motivation.py
 ├── requirements.txt
-├── wsgi.py
 └── README.md
 ```
 

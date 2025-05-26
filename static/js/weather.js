@@ -69,21 +69,6 @@ function refreshWeather() {
         });
 }
 
-// Helper function to get the appropriate weather icon
-function getWeatherIcon(weather) {
-    const icons = {
-        'Clear': 'sun',
-        'Clouds': 'cloud',
-        'Rain': 'cloud-rain',
-        'Snow': 'snowflake',
-        'Thunderstorm': 'bolt',
-        'Drizzle': 'cloud-rain',
-        'Mist': 'smog',
-        'Fog': 'smog'
-    };
-    return icons[weather] || 'cloud';
-}
-
 // Initialize auto-refresh when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Initial refresh
