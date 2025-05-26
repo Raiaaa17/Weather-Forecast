@@ -6,7 +6,12 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-def get_weather():
+# Global variable to store weather data
+cached_weather_data = None
+last_update_time = None
+
+def fetch_weather_data():
+    """Fetch fresh weather data from the API"""
     OWM_Endpoint = "https://api.openweathermap.org/data/2.5/forecast"
     API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
     
@@ -37,9 +42,26 @@ def get_weather():
             dic[formatted_date] = {}
         if formatted_time not in dic[formatted_date]:
             dic[formatted_date][formatted_time] = []
-        dic[formatted_date][formatted_time].extend([weather, temp])  # Add temperature to the data
-        
+        dic[formatted_date][formatted_time].extend([weather, temp])
+    
     return dic
+
+def update_weather():
+    """Update the cached weather data"""
+    global cached_weather_data, last_update_time
+    try:
+        cached_weather_data = fetch_weather_data()
+        last_update_time = datetime.now()
+        print(f"Weather data updated at {last_update_time}")
+    except Exception as e:
+        print(f"Error updating weather data: {e}")
+
+def get_weather():
+    """Get weather data from cache or fetch new data if needed"""
+    global cached_weather_data
+    if cached_weather_data is None:
+        update_weather()
+    return cached_weather_data
 
 get_weather()
 

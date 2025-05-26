@@ -159,4 +159,12 @@ h1::after {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.5);
+}
+
+.last-update {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-style: italic;
 } 
