@@ -2,6 +2,8 @@
 
 A beautiful weather forecast application for the NUS Kent Ridge campus area. The application shows a 5-day weather forecast with temperature and weather conditions in an elegant, modern UI.
 
+🌐 **Live Demo**: [View the application on Vercel](https://weather-forecast-raiaaa17.vercel.app)
+
 ## Features
 
 - 5-day weather forecast for NUS Kent Ridge campus
@@ -10,6 +12,7 @@ A beautiful weather forecast application for the NUS Kent Ridge campus area. The
 - Temperature in Celsius
 - Weather condition icons
 - Mobile-friendly interface
+- Dark mode UI with glassmorphism effects
 
 ## Tech Stack
 
@@ -19,13 +22,14 @@ A beautiful weather forecast application for the NUS Kent Ridge campus area. The
 - HTML5
 - CSS3
 - Font Awesome icons
+- Vercel (Deployment)
 
-## Installation
+## Local Development
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
-cd rain_alert
+git clone https://github.com/Raiaaa17/Weather-Forecast.git
+cd Weather-Forecast
 ```
 
 2. Install the required packages:
@@ -46,15 +50,27 @@ pip install -r requirements.txt
 python app.py
 ```
 
-5. Open your browser and navigate to `http://localhost:5000`
+5. Open your browser and navigate to `http://localhost:8000`
+
+## Deployment
+
+This application is deployed on Vercel. To deploy your own instance:
+
+1. Fork this repository
+2. Sign up for a [Vercel account](https://vercel.com)
+3. Create a new project and import your forked repository
+4. Add your environment variables in Vercel:
+   - `OPENWEATHERMAP_API_KEY`: Your OpenWeatherMap API key
+5. Deploy!
 
 ## Project Structure
 
 ```
-rain_alert/
+Weather-Forecast/
 ├── app.py              # Flask application
 ├── weather.py          # Weather API integration
 ├── requirements.txt    # Project dependencies
+├── vercel.json        # Vercel configuration
 ├── .env               # Environment variables (not tracked by Git)
 ├── static/
 │   └── css/
@@ -65,11 +81,15 @@ rain_alert/
 
 ## Environment Variables
 
-The application requires the following environment variables in a `.env` file:
+The application requires the following environment variables:
 - `OPENWEATHERMAP_API_KEY` - Your OpenWeatherMap API key
 
 ⚠️ **Important**: Never commit your `.env` file or expose your API keys. The `.env` file is already added to `.gitignore`.
 
 ## Contributing
 
-Feel free to open issues and pull requests! 
+Feel free to open issues and pull requests!
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE). 
