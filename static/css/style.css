@@ -10,11 +10,17 @@ body {
     min-height: 100vh;
     padding: 2rem;
     color: #fff;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
@@ -153,18 +159,63 @@ h1::after {
 }
 
 .footer {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1rem;
+    margin-top: 3rem;
+    padding: 1rem 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-info span, .footer-info a {
+    color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-info a:hover {
+    color: #fff;
+}
+
+.footer-info .fa-heart {
+    color: #ff6b6b;
 }
 
 .last-update {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
-    margin-top: 0.5rem;
-    text-align: center;
-    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.last-update i {
+    color: #7fdbff;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
 } 

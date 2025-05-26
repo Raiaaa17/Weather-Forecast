@@ -8,6 +8,7 @@ A beautiful weather forecast application for the NUS Kent Ridge campus area. The
 
 - 5-day weather forecast for NUS Kent Ridge campus
 - Real-time weather data from OpenWeatherMap API
+- Automatic updates every 3 hours
 - Modern, responsive design with animations
 - Temperature in Celsius
 - Weather condition icons
@@ -18,6 +19,7 @@ A beautiful weather forecast application for the NUS Kent Ridge campus area. The
 
 - Python 3.x
 - Flask
+- Flask-APScheduler
 - OpenWeatherMap API
 - HTML5
 - CSS3
@@ -85,6 +87,12 @@ The application requires the following environment variables:
 - `OPENWEATHERMAP_API_KEY` - Your OpenWeatherMap API key
 
 ⚠️ **Important**: Never commit your `.env` file or expose your API keys. The `.env` file is already added to `.gitignore`.
+
+## Contact
+
+- **Developer**: Rayana Diana
+- **Email**: rayanarahadiva@gmail.com
+- **GitHub**: [@Raiaaa17](https://github.com/Raiaaa17)
 
 ## Contributing
 
