@@ -11,51 +11,51 @@ import os
 load_dotenv()
 
 app = Flask(__name__, static_folder='static')
-scheduler = APScheduler()
 
-# Scheduler configuration
-class Config:
-    SCHEDULER_API_ENABLED = True
-    SCHEDULER_TIMEZONE = "Asia/Singapore"
+# Only initialize scheduler when running locally
+if __name__ == '__main__':
+    scheduler = APScheduler()
+    
+    # Scheduler configuration
+    class Config:
+        SCHEDULER_API_ENABLED = True
+        SCHEDULER_TIMEZONE = "Asia/Singapore"
 
-app.config.from_object(Config())
+    app.config.from_object(Config())
 
-# Initialize scheduler
-scheduler.init_app(app)
-scheduler.start()
-
-# Schedule weather update every 3 hours
-@scheduler.task('interval', id='update_weather', hours=3, misfire_grace_time=900)
-def scheduled_weather_update():
-    update_weather()
-    print(f"Scheduled weather update completed at {datetime.now()}")
+    # Initialize scheduler
+    scheduler.init_app(app)
+    scheduler.start()
 
 @app.route('/')
 def index():
-    weather_data = get_weather()
-    # Get current time in SGT
-    sgt = pytz.timezone('Asia/Singapore')
-    last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
-    daily_quote = get_daily_quote()
-    return render_template('index.html', 
-                         weather_data=weather_data, 
-                         last_update=last_update,
-                         daily_quote=daily_quote)
+    try:
+        weather_data = get_weather()
+        # Get current time in SGT
+        sgt = pytz.timezone('Asia/Singapore')
+        last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
+        daily_quote = get_daily_quote()
+        return render_template('index.html', 
+                             weather_data=weather_data, 
+                             last_update=last_update,
+                             daily_quote=daily_quote)
+    except Exception as e:
+        return str(e), 500
 
 @app.route('/refresh-weather')
 def refresh_weather():
-    update_weather()
-    weather_data = get_weather()
-    # Get current time in SGT
-    sgt = pytz.timezone('Asia/Singapore')
-    last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
-    return jsonify({
-        'weather_data': weather_data,
-        'last_update': last_update
-    })
-
-# Vercel requires this
-app.debug = True
+    try:
+        update_weather()
+        weather_data = get_weather()
+        # Get current time in SGT
+        sgt = pytz.timezone('Asia/Singapore')
+        last_update = datetime.now(sgt).strftime("%H:%M:%S SGT")
+        return jsonify({
+            'weather_data': weather_data,
+            'last_update': last_update
+        })
+    except Exception as e:
+        return str(e), 500
 
 if __name__ == '__main__':
     # Initial weather update
