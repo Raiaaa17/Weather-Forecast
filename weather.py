@@ -45,13 +45,22 @@ def fetch_weather_data():
     response.raise_for_status()
     data = response.json()
 
+    # Get timezone info
+    utc = pytz.UTC
+    sgt = pytz.timezone('Asia/Singapore')
+    
     formatted_data = {}
     seen_dates = set()
     
     for item in data["list"]:
-        # Get date and time
-        dt = datetime.strptime(item["dt_txt"], "%Y-%m-%d %H:%M:%S")
-        date = dt.strftime("%b %d")  # Format: "May 27"
+        # Convert UTC time to SGT
+        utc_time = datetime.strptime(item["dt_txt"], "%Y-%m-%d %H:%M:%S")
+        utc_time = utc.localize(utc_time)  # Make UTC time aware
+        sgt_time = utc_time.astimezone(sgt)  # Convert to SGT
+        
+        # Format date and time in SGT
+        date = sgt_time.strftime("%b %d")  # Format: "May 27"
+        time = sgt_time.strftime("%H:%M")  # 24-hour format
         
         # Only process if we haven't seen 5 days yet
         if len(seen_dates) < 5 or date in seen_dates:
@@ -63,7 +72,7 @@ def fetch_weather_data():
             
             # Create forecast object
             forecast = {
-                "time": dt.strftime("%H:%M"),
+                "time": time,
                 "description": weather_condition,
                 "temp": temp,
                 "icon": get_weather_icon(weather_condition)
@@ -74,9 +83,13 @@ def fetch_weather_data():
                 formatted_data[date] = []
             formatted_data[date].append(forecast)
     
+    # Sort forecasts by time for each date
+    for date in formatted_data:
+        formatted_data[date].sort(key=lambda x: x["time"])
+    
     # Only keep the first 5 days
     if len(formatted_data) > 5:
-        formatted_data = dict(list(formatted_data.items())[:5])
+        formatted_data = dict(sorted(formatted_data.items())[:5])
     
     return formatted_data
 

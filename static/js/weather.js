@@ -18,7 +18,7 @@ function refreshWeather() {
             // Update last update time
             const lastUpdateSpan = document.getElementById('last-update-time');
             if (lastUpdateSpan && data.last_update) {
-                lastUpdateSpan.textContent = data.last_update;
+                lastUpdateSpan.textContent = `${data.last_update} SGT`;
             }
             
             // Update weather grid
