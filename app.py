@@ -8,5 +8,8 @@ def index():
     weather_data = get_weather()
     return render_template('index.html', weather_data=weather_data)
 
+# Vercel requires this
+app.debug = True
+
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(host='0.0.0.0', port=8000) 
