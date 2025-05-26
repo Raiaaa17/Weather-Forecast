@@ -1,6 +1,14 @@
 // Constants
 const REFRESH_INTERVAL = 3 * 60 * 60 * 1000; // 3 hours in milliseconds
 
+// Function to ensure SGT is displayed in the last update time
+function ensureSGTDisplay() {
+    const lastUpdateSpan = document.getElementById('last-update-time');
+    if (lastUpdateSpan && !lastUpdateSpan.textContent.includes('SGT')) {
+        lastUpdateSpan.textContent = `${lastUpdateSpan.textContent} SGT`;
+    }
+}
+
 function refreshWeather() {
     const refreshBtn = document.getElementById('refresh-btn');
     
@@ -90,6 +98,9 @@ function setupAutoRefresh() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure SGT is displayed on initial load
+    ensureSGTDisplay();
+    
     // Set up initial auto-refresh
     setupAutoRefresh();
     
