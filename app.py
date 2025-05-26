@@ -18,7 +18,7 @@ def index():
         # Get current time in SGT
         sgt = pytz.timezone('Asia/Singapore')
         current_time = datetime.now(sgt)
-        last_update = current_time.strftime("%H:%M:%S SGT")
+        last_update = current_time.strftime("%H:%M:%S")
         
         # Get daily quote
         daily_quote = get_daily_quote()
@@ -43,7 +43,7 @@ def refresh_weather():
         # Get current time in SGT
         sgt = pytz.timezone('Asia/Singapore')
         current_time = datetime.now(sgt)
-        last_update = current_time.strftime("%H:%M:%S SGT")
+        last_update = current_time.strftime("%H:%M:%S")
         
         return jsonify({
             'weather_data': weather_data,
